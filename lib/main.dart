@@ -1,5 +1,7 @@
 import 'package:ansory/bottombar.dart';
 import 'package:ansory/home.dart';
+import 'package:ansory/login/login.dart';
+import 'package:ansory/splash.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -26,7 +28,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: Bottom(),
+      home: Splash(),
       debugShowCheckedModeBanner: false,
     );
   }
