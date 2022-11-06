@@ -35,7 +35,7 @@ class _SplashState extends State<Splash> {
         if (data["data"] == "sukses") {
           await prefs.remove('uname');
           await prefs.remove('pass');
-          await prefs.setString('uname', uname_!);
+          await prefs.setString('uname', uname_);
           await prefs.setString('pass', pass_!);
           dataUser.clear();
           dataUser.add(DataUser(
