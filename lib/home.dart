@@ -1,4 +1,5 @@
 import 'package:ansory/daftarpustaka/daftarpustaka.dart';
+import 'package:ansory/evaluasi/evaluasi.dart';
 import 'package:ansory/informasi/informasi.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
@@ -125,6 +126,9 @@ class _HomeState extends State<Home> {
               children: [
                 InkWell(
                   onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Evaluation()));
+
                     // cekakses("report_at_ro");
                   },
                   child: Container(
