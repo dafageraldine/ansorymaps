@@ -36,6 +36,7 @@ dependencies:
   shared_preferences: ^2.0.15
   flutter_screenutil: ^5.5.3+2
   fluttertoast: ^8.0.9
+  loading_animation_widget: ^1.2.0+2
   http: any
 
 dev_dependencies:

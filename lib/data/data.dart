@@ -1,4 +1,4 @@
-var baseurl = "https://ansoryapi.herokuapp.com/";
+var baseurl = "https://syihabuddin.pythonanywhere.com/";
 
 String Build = "1";
 String Major = "0";
