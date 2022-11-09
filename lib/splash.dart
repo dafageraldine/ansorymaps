@@ -57,6 +57,10 @@ class _SplashState extends State<Splash> {
           msg: e.toString(),
           backgroundColor: Colors.black,
           textColor: Colors.white);
+      Timer(const Duration(seconds: 2), () {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => Login()));
+      });
     }
   }
 

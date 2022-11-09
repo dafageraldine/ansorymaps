@@ -19,6 +19,7 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  var isloading = 0;
   TextEditingController uname = TextEditingController();
   TextEditingController pass = TextEditingController();
 
@@ -65,6 +66,9 @@ class _LoginState extends State<Login> {
       var data = json.decode(cek.body);
       print(cek.body);
       if (data["data"] == "sukses") {
+        setState(() {
+          isloading = 0;
+        });
         final prefs = await SharedPreferences.getInstance();
         await prefs.remove('uname');
         await prefs.remove('pass');
@@ -76,9 +80,15 @@ class _LoginState extends State<Login> {
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => Bottom()));
       } else {
+        setState(() {
+          isloading = 0;
+        });
         showAlertDialog(context, data["data"].toString());
       }
     } catch (e) {
+      setState(() {
+        isloading = 0;
+      });
       Fluttertoast.showToast(
           msg: e.toString(),
           backgroundColor: Colors.black,
@@ -128,6 +138,9 @@ class _LoginState extends State<Login> {
           20.verticalSpace,
           InkWell(
             onTap: () async {
+              setState(() {
+                isloading = 1;
+              });
               await login();
             },
             child: Container(
@@ -137,13 +150,17 @@ class _LoginState extends State<Login> {
                   color: Color.fromRGBO(54, 37, 35, 1),
                   borderRadius: BorderRadius.circular(5)),
               child: Center(
-                  child: Text(
-                "Masuk",
-                style: TextStyle(
-                    color: Color.fromRGBO(227, 205, 148, 1),
-                    fontSize: 18.sp,
-                    fontWeight: FontWeight.w600),
-              )),
+                  child: isloading == 1
+                      ? CircularProgressIndicator(
+                          color: Color.fromRGBO(227, 205, 148, 1),
+                        )
+                      : Text(
+                          "Masuk",
+                          style: TextStyle(
+                              color: Color.fromRGBO(227, 205, 148, 1),
+                              fontSize: 18.sp,
+                              fontWeight: FontWeight.w600),
+                        )),
             ),
           ),
           10.verticalSpace,
