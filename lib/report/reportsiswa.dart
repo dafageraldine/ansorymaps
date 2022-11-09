@@ -25,7 +25,57 @@ class _ReportSiswaState extends State<ReportSiswa> {
   var text_like = "";
   List<Datasiswa> listTampil = <Datasiswa>[];
 
-  Future<void> deletedata() async {}
+  Future<void> deletedata(String ids) async {
+    try {
+      print("ini id " + ids);
+      var body = {"username": dataUser[0].username, "id": ids};
+      http.Response cek =
+          await http.post(Uri.parse(baseurl + "deletenilai"), body: body);
+      print(cek.body);
+      var data = json.decode(cek.body);
+      // print(cek.body);
+      showAlertDialoginfo(context, data["data"].toString());
+      await isidata();
+    } catch (e) {
+      Fluttertoast.showToast(
+          msg: e.toString(),
+          backgroundColor: Colors.black,
+          textColor: Colors.white);
+    }
+  }
+
+  showAlertDialoginfo(BuildContext context, String info) {
+    // set up the buttons
+
+    Widget continueButton = TextButton(
+      child: Text(
+        "ok",
+        style: TextStyle(color: Color.fromRGBO(187, 121, 91, 1)),
+      ),
+      onPressed: () {
+        Navigator.of(context).pop();
+        // await delete();
+      },
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Text("Information"),
+      content: Text(info),
+      actions: [
+        continueButton,
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
 
   filter(String type) async {
     if (type == "nilai") {
@@ -191,6 +241,49 @@ class _ReportSiswaState extends State<ReportSiswa> {
     // TODO: implement initState
     isidata();
     super.initState();
+  }
+
+  showAlertDialog(BuildContext context, String info, String ids) {
+    // set up the buttons
+    Widget cancelButton = TextButton(
+      child: Text(
+        "Tidak",
+        style: TextStyle(color: Colors.grey[400]),
+      ),
+      onPressed: () {
+        Navigator.of(context).pop();
+        // await delete();
+      },
+    );
+
+    Widget continueButton = TextButton(
+      child: Text(
+        "Ya",
+        style: TextStyle(color: Color.fromRGBO(187, 121, 91, 1)),
+      ),
+      onPressed: () async {
+        Navigator.of(context).pop();
+        await deletedata(ids);
+      },
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Text("Warning"),
+      content: Text(info),
+      actions: [
+        cancelButton,
+        continueButton,
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
   }
 
   void _showDialogfilter(judul, konten) {
@@ -475,7 +568,10 @@ class _ReportSiswaState extends State<ReportSiswa> {
   Widget _generateFirstColumnRow(BuildContext context, int index) {
     return InkWell(
       onTap: () {
-        if (listTampil[index].nilai != "belum tes") {}
+        if (listTampil[index].nilai != "belum tes") {
+          showAlertDialog(context, "apakah anda ingin hapus data ini ! ",
+              listTampil[index].id);
+        }
       },
       child: Container(
         width: 0.23.sw,
