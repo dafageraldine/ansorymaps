@@ -1,6 +1,9 @@
 import 'package:ansory/daftarpustaka/daftarpustaka.dart';
+import 'package:ansory/data/data.dart';
 import 'package:ansory/evaluasi/evaluasi.dart';
 import 'package:ansory/informasi/informasi.dart';
+import 'package:ansory/login/login.dart';
+import 'package:ansory/report/reportsiswa.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -216,64 +219,71 @@ class _HomeState extends State<Home> {
             ),
           ),
           20.verticalSpace,
-          Padding(
-            padding: EdgeInsets.only(left: 0.05.sw),
-            child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text("Nilai",
-                    style: TextStyle(fontWeight: FontWeight.w800))),
-          ),
-          15.verticalSpace,
-          Padding(
-            padding: EdgeInsets.only(left: 0.1.sw),
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: InkWell(
-                onTap: () {
-                  // cekakses("report_at_ro");
-                },
-                child: Container(
-                    width: 0.5.sw,
-                    height: 0.25.sw,
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10),
-                        boxShadow: [
-                          BoxShadow(
-                              blurRadius: 2.0,
-                              color: Colors.black12,
-                              spreadRadius: 5.0,
-                              offset: Offset(0, 2))
-                        ]),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Image.asset(
-                          "assets/score.png",
-                          width: 50.w,
-                          height: 50.w,
-                        ),
-                        Text(
-                          "Lihat Nilai Siswa",
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 14.sp,
-                              // fontFamily: 'Inter',
-                              fontWeight: FontWeight.w600),
-                        ),
-                      ],
-                    )
-                    //  Column(children: [
-                    //   10.verticalSpace,
+          dataUser[0].username != "admin"
+              ? Text("")
+              : Padding(
+                  padding: EdgeInsets.only(left: 0.05.sw),
+                  child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text("Nilai",
+                          style: TextStyle(fontWeight: FontWeight.w800))),
+                ),
+          dataUser[0].username != "admin" ? Text("") : 15.verticalSpace,
+          dataUser[0].username != "admin"
+              ? Text("")
+              : Padding(
+                  padding: EdgeInsets.only(left: 0.1.sw),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ReportSiswa()));
+                      },
+                      child: Container(
+                          width: 0.5.sw,
+                          height: 0.25.sw,
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10),
+                              boxShadow: [
+                                BoxShadow(
+                                    blurRadius: 2.0,
+                                    color: Colors.black12,
+                                    spreadRadius: 5.0,
+                                    offset: Offset(0, 2))
+                              ]),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Image.asset(
+                                "assets/score.png",
+                                width: 50.w,
+                                height: 50.w,
+                              ),
+                              Text(
+                                "Lihat Nilai Siswa",
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 14.sp,
+                                    // fontFamily: 'Inter',
+                                    fontWeight: FontWeight.w600),
+                              ),
+                            ],
+                          )
+                          //  Column(children: [
+                          //   10.verticalSpace,
 
-                    //   10.verticalSpace,
+                          //   10.verticalSpace,
 
-                    // ]),
+                          // ]),
+                          ),
                     ),
-              ),
-            ),
-          ),
-          20.verticalSpace
+                  ),
+                ),
+          dataUser[0].username != "admin" ? Text("") : 20.verticalSpace
         ]),
       ),
     );

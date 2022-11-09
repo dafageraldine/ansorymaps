@@ -140,7 +140,7 @@ class _EvaluationState extends State<Evaluation> {
 
   showAlertDialog(BuildContext context) {
     // set up the buttons
-    Widget cancelButton = FlatButton(
+    Widget cancelButton = TextButton(
       child: Text(
         "No",
         style: TextStyle(color: Colors.grey),
@@ -149,7 +149,7 @@ class _EvaluationState extends State<Evaluation> {
         Navigator.of(context, rootNavigator: true).pop();
       },
     );
-    Widget continueButton = FlatButton(
+    Widget continueButton = TextButton(
       child: Text(
         "yes",
         style: TextStyle(

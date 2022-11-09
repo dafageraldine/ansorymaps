@@ -26,9 +26,47 @@ class _RegisterState extends State<Register> {
   TextEditingController uname = TextEditingController();
   TextEditingController pass = TextEditingController();
 
+  showAlertDialog(BuildContext context, String info) {
+    // set up the buttons
+
+    Widget continueButton = TextButton(
+      child: Text(
+        "ok",
+        style: TextStyle(color: Color.fromRGBO(187, 121, 91, 1)),
+      ),
+      onPressed: () {
+        Navigator.of(context).pop();
+        // await delete();
+      },
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Text("Warning"),
+      content: Text(info),
+      actions: [
+        continueButton,
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
+
   Future register() async {
     try {
       print("daftar");
+      if (name.text.toString() != "") {
+        if (name.text.toString().trim().length > 25) {
+          showAlertDialog(context, "panjang karakter nama maksimal 25 huruf !");
+        }
+      }
       var body = {
         "absen": absen.text,
         "kelas": kelas.text,

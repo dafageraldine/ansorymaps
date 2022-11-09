@@ -12,4 +12,16 @@ class DataUser {
   DataUser(this.nama, this.kelas, this.absen, this.username);
 }
 
+class Datasiswa {
+  String nama;
+  String kelas;
+  String absen;
+  String nilai;
+  String id;
+  String username;
+  Datasiswa(
+      this.nama, this.kelas, this.absen, this.nilai, this.id, this.username);
+}
+
 List<DataUser> dataUser = <DataUser>[];
+List<Datasiswa> listDataSiswa = <Datasiswa>[];

@@ -22,6 +22,39 @@ class _LoginState extends State<Login> {
   TextEditingController uname = TextEditingController();
   TextEditingController pass = TextEditingController();
 
+  showAlertDialog(BuildContext context, String info) {
+    // set up the buttons
+
+    Widget continueButton = TextButton(
+      child: Text(
+        "ok",
+        style: TextStyle(color: Color.fromRGBO(187, 121, 91, 1)),
+      ),
+      onPressed: () {
+        Navigator.of(context).pop();
+        // await delete();
+      },
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Text("Warning"),
+      content: Text(info),
+      actions: [
+        continueButton,
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
+
   Future login() async {
     try {
       print("loginnn");
@@ -42,6 +75,8 @@ class _LoginState extends State<Login> {
             data["nama"], data["kelas"], data["absen"], data["username"]));
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => Bottom()));
+      } else {
+        showAlertDialog(context, data["data"].toString());
       }
     } catch (e) {
       Fluttertoast.showToast(

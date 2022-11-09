@@ -34,7 +34,7 @@ class _BottomState extends State<Bottom> {
 
   showAlertDialog(BuildContext context) {
     // set up the buttons
-    Widget cancelButton = FlatButton(
+    Widget cancelButton = TextButton(
       child: Text(
         "No",
         style: TextStyle(color: Colors.grey),
@@ -43,7 +43,7 @@ class _BottomState extends State<Bottom> {
         Navigator.of(context, rootNavigator: true).pop();
       },
     );
-    Widget continueButton = FlatButton(
+    Widget continueButton = TextButton(
       child: Text(
         "yes",
         style: TextStyle(color: Color.fromRGBO(187, 121, 91, 1)),
