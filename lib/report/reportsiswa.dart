@@ -25,6 +25,8 @@ class _ReportSiswaState extends State<ReportSiswa> {
   var text_like = "";
   List<Datasiswa> listTampil = <Datasiswa>[];
 
+  Future<void> deletedata() async {}
+
   filter(String type) async {
     if (type == "nilai") {
       if (likes.text != "") {
