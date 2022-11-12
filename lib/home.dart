@@ -1,6 +1,7 @@
 import 'package:ansory/daftarpustaka/daftarpustaka.dart';
 import 'package:ansory/data/data.dart';
 import 'package:ansory/evaluasi/evaluasi.dart';
+import 'package:ansory/galeri/galeri.dart';
 import 'package:ansory/informasi/informasi.dart';
 import 'package:ansory/login/login.dart';
 import 'package:ansory/report/reportsiswa.dart';
@@ -86,6 +87,9 @@ class _HomeState extends State<Home> {
                 InkWell(
                   onTap: () {
                     // cekakses("report_at_ro");
+
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Gallery()));
                   },
                   child: Container(
                     width: 0.35.sw,

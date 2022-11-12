@@ -39,6 +39,7 @@ dependencies:
   loading_animation_widget: ^1.2.0+2
   horizontal_data_table: ^4.1.1+1
   http: any
+  carousel_slider: ^4.1.1
 
 dev_dependencies:
   flutter_test:
