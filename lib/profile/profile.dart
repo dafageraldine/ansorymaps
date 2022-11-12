@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:ansory/login/login.dart';
+import 'package:ansory/profile/profilepengembang.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -126,46 +127,56 @@ class _ProfileState extends State<Profile> {
             ]),
           ),
           20.verticalSpace,
-          Container(
-            width: 0.8.sw,
-            height: 0.06.sh,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8),
-              color: Colors.white,
-              boxShadow: [
-                BoxShadow(
-                    blurRadius: 5.0,
-                    color: Colors.black12,
-                    spreadRadius: 5.0,
-                    offset: Offset(0, 2))
-              ],
+          InkWell(
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => ProfilePengembang()));
+            },
+            child: Container(
+              width: 0.8.sw,
+              height: 0.06.sh,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8),
+                color: Colors.white,
+                boxShadow: [
+                  BoxShadow(
+                      blurRadius: 5.0,
+                      color: Colors.black12,
+                      spreadRadius: 5.0,
+                      offset: Offset(0, 2))
+                ],
+              ),
+              child: Center(
+                  child: Text(
+                "Profil pengembang",
+                style: TextStyle(fontWeight: FontWeight.w600, fontSize: 14.sp),
+              )),
             ),
-            child: Center(
-                child: Text(
-              "Profil pengembang",
-              style: TextStyle(fontWeight: FontWeight.w600, fontSize: 14.sp),
-            )),
           ),
           20.verticalSpace,
-          Container(
-            width: 0.8.sw,
-            height: 0.06.sh,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8),
-              color: Colors.white,
-              boxShadow: [
-                BoxShadow(
-                    blurRadius: 5.0,
-                    color: Colors.black12,
-                    spreadRadius: 5.0,
-                    offset: Offset(0, 2))
-              ],
+          InkWell(
+            child: Container(
+              width: 0.8.sw,
+              height: 0.06.sh,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8),
+                color: Colors.white,
+                boxShadow: [
+                  BoxShadow(
+                      blurRadius: 5.0,
+                      color: Colors.black12,
+                      spreadRadius: 5.0,
+                      offset: Offset(0, 2))
+                ],
+              ),
+              child: Center(
+                  child: Text(
+                dataUser[0].username == "admin"
+                    ? "Manage data siswa"
+                    : "ubah profile",
+                style: TextStyle(fontWeight: FontWeight.w600, fontSize: 14.sp),
+              )),
             ),
-            child: Center(
-                child: Text(
-              "Manage data siswa",
-              style: TextStyle(fontWeight: FontWeight.w600, fontSize: 14.sp),
-            )),
           ),
           20.verticalSpace,
           InkWell(
