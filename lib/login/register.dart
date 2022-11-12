@@ -25,6 +25,7 @@ class _RegisterState extends State<Register> {
   TextEditingController absen = TextEditingController();
   TextEditingController uname = TextEditingController();
   TextEditingController pass = TextEditingController();
+  var isloading = 0;
 
   showAlertDialog(BuildContext context, String info) {
     // set up the buttons
@@ -61,7 +62,10 @@ class _RegisterState extends State<Register> {
 
   Future register() async {
     try {
-      print("daftar");
+      setState(() {
+        isloading = 1;
+      });
+      // print("daftar");
       if (name.text.toString() != "") {
         if (name.text.toString().trim().length > 25) {
           showAlertDialog(context, "panjang karakter nama maksimal 25 huruf !");
@@ -78,7 +82,10 @@ class _RegisterState extends State<Register> {
           await http.post(Uri.parse(baseurl + "register"), body: body);
       // print(cek.body);
       var data = json.decode(cek.body);
-      print(cek.body);
+      // print(cek.body);
+      setState(() {
+        isloading = 0;
+      });
       if (data["data"] == "sukses") {
         final prefs = await SharedPreferences.getInstance();
         await prefs.remove('uname');
@@ -91,6 +98,9 @@ class _RegisterState extends State<Register> {
             context, MaterialPageRoute(builder: (context) => Bottom()));
       }
     } catch (e) {
+      setState(() {
+        isloading = 0;
+      });
       Fluttertoast.showToast(
           msg: e.toString(),
           backgroundColor: Colors.black,
@@ -169,23 +179,31 @@ class _RegisterState extends State<Register> {
           15.verticalSpace,
           InkWell(
             onTap: () async {
-              await register();
+              if (isloading == 0) {
+                await register();
+              }
             },
-            child: Container(
-              width: 0.7.sw,
-              height: 0.07.sh,
-              decoration: BoxDecoration(
-                  color: Color.fromRGBO(233, 207, 146, 1),
-                  borderRadius: BorderRadius.circular(5)),
-              child: Center(
-                  child: Text(
-                "Daftar",
-                style: TextStyle(
-                    color: Color.fromRGBO(54, 37, 35, 1),
-                    fontSize: 18.sp,
-                    fontWeight: FontWeight.w600),
-              )),
-            ),
+            child: isloading == 1
+                ? Center(
+                    child: CircularProgressIndicator(
+                      color: Color.fromRGBO(54, 37, 35, 1),
+                    ),
+                  )
+                : Container(
+                    width: 0.7.sw,
+                    height: 0.07.sh,
+                    decoration: BoxDecoration(
+                        color: Color.fromRGBO(233, 207, 146, 1),
+                        borderRadius: BorderRadius.circular(5)),
+                    child: Center(
+                        child: Text(
+                      "Daftar",
+                      style: TextStyle(
+                          color: Color.fromRGBO(54, 37, 35, 1),
+                          fontSize: 18.sp,
+                          fontWeight: FontWeight.w600),
+                    )),
+                  ),
           ),
           10.verticalSpace,
           Text(
@@ -195,8 +213,10 @@ class _RegisterState extends State<Register> {
           10.verticalSpace,
           InkWell(
             onTap: () async {
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => Login()));
+              if (isloading == 0) {
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => Login()));
+              }
             },
             child: Container(
               width: 0.7.sw,

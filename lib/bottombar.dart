@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, unnecessary_import
 
 import 'dart:io';
+import 'package:ansory/profile/profile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 // ignore: implementation_imports
@@ -27,9 +28,7 @@ class _BottomState extends State<Bottom> {
       child: Text("2"),
     ),
     Home(),
-    Center(
-      child: Text("3"),
-    )
+    Profile()
   ];
 
   showAlertDialog(BuildContext context) {
