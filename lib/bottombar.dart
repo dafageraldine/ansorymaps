@@ -13,7 +13,8 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'home.dart';
 
 class Bottom extends StatefulWidget {
-  const Bottom({Key? key}) : super(key: key);
+  final int index_;
+  const Bottom(this.index_, {Key? key}) : super(key: key);
 
   @override
   State<Bottom> createState() => _BottomState();
@@ -71,6 +72,13 @@ class _BottomState extends State<Bottom> {
         return alert;
       },
     );
+  }
+
+  @override
+  void initState() {
+    _currentIndex = widget.index_;
+    setState(() {});
+    super.initState();
   }
 
   @override

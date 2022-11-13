@@ -75,10 +75,10 @@ class _LoginState extends State<Login> {
         await prefs.setString('uname', uname.text);
         await prefs.setString('pass', pass.text);
         dataUser.clear();
-        dataUser.add(DataUser(
-            data["nama"], data["kelas"], data["absen"], data["username"]));
+        dataUser.add(DataUser(data["nama"], data["kelas"], data["absen"],
+            data["username"], data["id"]));
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => Bottom()));
+            context, MaterialPageRoute(builder: (context) => Bottom(1)));
       } else {
         setState(() {
           isloading = 0;

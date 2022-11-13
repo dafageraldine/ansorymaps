@@ -31,7 +31,7 @@ class _ProfilePengembangState extends State<ProfilePengembang> {
               child: Column(
             children: [
               Padding(
-                padding: EdgeInsets.only(top: 0.12.sh),
+                padding: EdgeInsets.only(top: 0.11.sh),
                 child: Container(
                   width: 1.sw,
                   height: 0.3.sh,

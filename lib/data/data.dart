@@ -9,7 +9,8 @@ class DataUser {
   String kelas;
   String absen;
   String username;
-  DataUser(this.nama, this.kelas, this.absen, this.username);
+  String id;
+  DataUser(this.nama, this.kelas, this.absen, this.username, this.id);
 }
 
 class Datasiswa {
@@ -19,8 +20,9 @@ class Datasiswa {
   String nilai;
   String id;
   String username;
-  Datasiswa(
-      this.nama, this.kelas, this.absen, this.nilai, this.id, this.username);
+  String idsiswa;
+  Datasiswa(this.nama, this.kelas, this.absen, this.nilai, this.id,
+      this.username, this.idsiswa);
 }
 
 final album_makam = [

@@ -245,7 +245,7 @@ class _InformationState extends State<Information> {
               18.verticalSpace,
               Container(
                 width: 0.85.sw,
-                height: 0.25.sh,
+                padding: EdgeInsets.only(bottom: 30),
                 // 227, 205, 148
                 decoration: BoxDecoration(
                     color: Color.fromRGBO(227, 205, 148, 1),
@@ -293,7 +293,7 @@ class _InformationState extends State<Information> {
               10.verticalSpace,
               Container(
                 width: 0.85.sw,
-                height: 0.35.sh,
+                padding: EdgeInsets.only(bottom: 30),
                 // 227, 205, 148
                 decoration: BoxDecoration(
                     color: Color.fromRGBO(227, 205, 148, 1),
@@ -378,8 +378,7 @@ class _InformationState extends State<Information> {
               ),
               10.verticalSpace,
               Container(
-                width: 0.85.sw,
-                height: 0.55.sh,
+                width: 0.85.sw, padding: EdgeInsets.only(bottom: 30),
                 // 227, 205, 148
                 decoration: BoxDecoration(
                     color: Color.fromRGBO(227, 205, 148, 1),

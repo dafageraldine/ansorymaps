@@ -10,14 +10,14 @@ import 'package:horizontal_data_table/horizontal_data_table.dart';
 import 'package:http/http.dart' as http;
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
-class ReportSiswa extends StatefulWidget {
-  const ReportSiswa({Key? key}) : super(key: key);
+class ManageStudent extends StatefulWidget {
+  const ManageStudent({Key? key}) : super(key: key);
 
   @override
-  State<ReportSiswa> createState() => _ReportSiswaState();
+  State<ManageStudent> createState() => _ManageStudentState();
 }
 
-class _ReportSiswaState extends State<ReportSiswa> {
+class _ManageStudentState extends State<ManageStudent> {
   TextEditingController likes = TextEditingController();
   var iserror = 0;
   var isloading = 0;
@@ -25,17 +25,43 @@ class _ReportSiswaState extends State<ReportSiswa> {
   var text_like = "";
   List<Datasiswa> listTampil = <Datasiswa>[];
 
-  Future<void> deletedata(Datasiswa ids) async {
+  Future<void> deletesiswa(Datasiswa ids) async {
     try {
-      // print("ini id " + ids);
-      var body = {"username": ids.username, "id": ids.id};
+      // print("ini id " + ids.toString());
+      var body = {
+        "username": ids.username.toString(),
+        "id": ids.idsiswa.toString()
+      };
       http.Response cek =
-          await http.post(Uri.parse(baseurl + "deletenilai"), body: body);
-      print(cek.body);
+          await http.post(Uri.parse(baseurl + "deletesiswa"), body: body);
+      // print(cek.body);
       var data = json.decode(cek.body);
       // print(cek.body);
       showAlertDialoginfo(context, data["data"].toString());
       await isidata();
+    } catch (e) {
+      Fluttertoast.showToast(
+          msg: e.toString(),
+          backgroundColor: Colors.black,
+          textColor: Colors.white);
+    }
+  }
+
+  Future<void> deletedata(Datasiswa datas) async {
+    try {
+      // print("ini id " + datas.id.toString());
+      var body = {"username": datas.username, "id": datas.id.toString()};
+      http.Response cek =
+          await http.post(Uri.parse(baseurl + "deletenilai"), body: body);
+      // print(cek.body);
+      var data = json.decode(cek.body);
+      // print(cek.body);
+      if (datas.idsiswa != "") {
+        await deletesiswa(datas);
+      } else {
+        showAlertDialoginfo(context, data["data"].toString());
+        await isidata();
+      }
     } catch (e) {
       Fluttertoast.showToast(
           msg: e.toString(),
@@ -244,7 +270,7 @@ class _ReportSiswaState extends State<ReportSiswa> {
     super.initState();
   }
 
-  showAlertDialog(BuildContext context, String info, Datasiswa ids) {
+  showAlertDialog(BuildContext context, String info, Datasiswa data) {
     // set up the buttons
     Widget cancelButton = TextButton(
       child: Text(
@@ -264,7 +290,11 @@ class _ReportSiswaState extends State<ReportSiswa> {
       ),
       onPressed: () async {
         Navigator.of(context).pop();
-        await deletedata(ids);
+        if (data.id != "") {
+          await deletedata(data);
+        } else {
+          await deletesiswa(data);
+        }
       },
     );
 
@@ -358,38 +388,6 @@ class _ReportSiswaState extends State<ReportSiswa> {
                         "nama",
                         style: TextStyle(
                             color: selected_filter == 2
-                                ? Colors.white
-                                : Colors.grey[600],
-                            fontWeight: FontWeight.w600),
-                      ))),
-                ),
-                5.verticalSpace,
-                InkWell(
-                  onTap: () {
-                    Navigator.of(context).pop();
-                    filter("nilai");
-                  },
-                  child: Container(
-                      width: 0.5.sw,
-                      height: 0.05.sh,
-                      decoration: BoxDecoration(
-                        boxShadow: [
-                          BoxShadow(
-                              blurRadius: 2.0,
-                              color: Colors.black12,
-                              spreadRadius: 2.0,
-                              offset: Offset(0, 2))
-                        ],
-                        color: selected_filter == 1
-                            ? Colors.grey[600]
-                            : Colors.white,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Center(
-                          child: Text(
-                        "nilai",
-                        style: TextStyle(
-                            color: selected_filter == 1
                                 ? Colors.white
                                 : Colors.grey[600],
                             fontWeight: FontWeight.w600),
@@ -542,7 +540,7 @@ class _ReportSiswaState extends State<ReportSiswa> {
     );
   }
 
-  final columns = ['Action', 'Nama Siswa', 'Kelas', 'Absen', 'Nilai'];
+  final columns = ['Action', 'Nama Siswa', 'Kelas', 'Absen'];
 
   List<Widget> _getTitleWidget() {
     return [
@@ -550,7 +548,6 @@ class _ReportSiswaState extends State<ReportSiswa> {
       _getTitleItemWidget(columns[1], 0.52.sw),
       _getTitleItemWidget(columns[2], 0.23.sw),
       _getTitleItemWidget(columns[3], 0.23.sw),
-      _getTitleItemWidget(columns[4], 0.2.sw)
     ];
   }
 
@@ -569,10 +566,10 @@ class _ReportSiswaState extends State<ReportSiswa> {
   Widget _generateFirstColumnRow(BuildContext context, int index) {
     return InkWell(
       onTap: () {
-        if (listTampil[index].nilai != "belum tes") {
-          showAlertDialog(context, "apakah anda ingin hapus data ini ! ",
-              listTampil[index]);
-        }
+        // if (listTampil[index].nilai != "belum tes") {
+        showAlertDialog(
+            context, "apakah anda ingin hapus siswa ini ! ", listTampil[index]);
+        // }
       },
       child: Container(
         width: 0.23.sw,
@@ -581,20 +578,12 @@ class _ReportSiswaState extends State<ReportSiswa> {
           child: Container(
             // ignore: sort_child_properties_last
             decoration: BoxDecoration(
-                color: listTampil[index].nilai == "belum tes"
-                    ? Colors.lightBlue
-                    : Color.fromRGBO(54, 37, 35, 1),
+                color: Color.fromRGBO(54, 37, 35, 1),
                 borderRadius: BorderRadius.circular(10)),
             child: Center(
-              child: listTampil[index].nilai == "belum tes"
-                  ? Text("Belum tes",
-                      style: TextStyle(
-                          fontWeight: FontWeight.w800,
-                          color: Colors.white,
-                          fontSize: 11.sp))
-                  : Text("Delete",
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold, color: Colors.white)),
+              child: Text("Delete",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, color: Colors.white)),
             ),
             width: 0.2.sw,
             height: 0.035.sh,
@@ -672,34 +661,6 @@ class _ReportSiswaState extends State<ReportSiswa> {
             alignment: Alignment.centerLeft,
           ),
         ),
-        InkWell(
-          onTap: () async {
-            // if (getdata == "1") {
-            //   Fluttertoast.showToast(
-            //       msg: "getting report on process, please wait !",
-            //       backgroundColor: Colors.black,
-            //       textColor: Colors.white);
-            // } else {
-            //   print("GET RO DETAIL");
-            //   await get_ro_detail_(index);
-            // }
-          },
-          child: Container(
-            child: Center(
-                child: listTampil[index].nilai == "belum tes"
-                    ? Text(listTampil[index].nilai)
-                    : Text(double.parse(listTampil[index].nilai)
-                        .round()
-                        .toString())),
-            width: 0.2.sw,
-            height: 0.05.sh,
-            decoration: BoxDecoration(
-                color: index % 2 == 1 ? Colors.grey[300] : Colors.white,
-                border: Border(left: BorderSide(width: 2, color: Colors.grey))),
-            padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
-            alignment: Alignment.centerLeft,
-          ),
-        ),
       ],
     );
   }
@@ -766,7 +727,7 @@ class _ReportSiswaState extends State<ReportSiswa> {
                     45.verticalSpace,
                     Center(
                       child: Text(
-                        "Report Nilai Siswa",
+                        "Daftar Siswa",
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 20.sp,
@@ -858,7 +819,7 @@ class _ReportSiswaState extends State<ReportSiswa> {
                           child: HorizontalDataTable(
                             headerWidgets: _getTitleWidget(),
                             leftHandSideColumnWidth: 0.23.sw,
-                            rightHandSideColumnWidth: 1.18.sw,
+                            rightHandSideColumnWidth: 0.98.sw,
                             leftSideItemBuilder: _generateFirstColumnRow,
                             rightSideItemBuilder:
                                 _generateRightHandSideColumnRow,

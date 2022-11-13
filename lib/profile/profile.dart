@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:ansory/login/login.dart';
+import 'package:ansory/profile/datasiswa.dart';
 import 'package:ansory/profile/editprofile.dart';
 import 'package:ansory/profile/profilepengembang.dart';
 import 'package:flutter/material.dart';
@@ -158,6 +159,8 @@ class _ProfileState extends State<Profile> {
           InkWell(
             onTap: () {
               if (dataUser[0].username == "admin") {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => ManageStudent()));
               } else {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => EditProfile()));

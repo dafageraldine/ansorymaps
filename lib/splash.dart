@@ -38,10 +38,10 @@ class _SplashState extends State<Splash> {
           await prefs.setString('uname', uname_);
           await prefs.setString('pass', pass_!);
           dataUser.clear();
-          dataUser.add(DataUser(
-              data["nama"], data["kelas"], data["absen"], data["username"]));
+          dataUser.add(DataUser(data["nama"], data["kelas"], data["absen"],
+              data["username"], data["id"]));
           Navigator.push(
-              context, MaterialPageRoute(builder: (context) => Bottom()));
+              context, MaterialPageRoute(builder: (context) => Bottom(1)));
         } else {
           Navigator.push(
               context, MaterialPageRoute(builder: (context) => Login()));

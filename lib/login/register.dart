@@ -20,6 +20,9 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
+  final regexnama = RegExp(r'^[a-zA-Z]');
+  final regexnomor = RegExp(r'^[0-9]');
+  final regexkelas = RegExp(r'^[a-zA-Z0-9]');
   TextEditingController name = TextEditingController();
   TextEditingController kelas = TextEditingController();
   TextEditingController absen = TextEditingController();
@@ -66,11 +69,80 @@ class _RegisterState extends State<Register> {
         isloading = 1;
       });
       // print("daftar");
-      if (name.text.toString() != "") {
-        if (name.text.toString().trim().length > 25) {
-          showAlertDialog(context, "panjang karakter nama maksimal 25 huruf !");
-        }
+      if (name.text == "" ||
+          kelas.text == "" ||
+          absen.text == "" ||
+          uname.text == "" ||
+          pass.text == "") {
+        setState(() {
+          isloading = 0;
+        });
+        showAlertDialog(context, "tidak boleh ada data yang kosong !");
+        return;
       }
+      if (name.text.length < 5) {
+        setState(() {
+          isloading = 0;
+        });
+        showAlertDialog(context, "nama harus 5 karakter atau lebih !");
+        return;
+      } else if (kelas.text.length < 2) {
+        setState(() {
+          isloading = 0;
+        });
+        showAlertDialog(context, "kelas harus 2 karakter atau lebih !");
+        return;
+      } else if (absen.text.length < 2) {
+        setState(() {
+          isloading = 0;
+        });
+
+        showAlertDialog(context, "absen harus 2 karakter atau lebih !");
+        return;
+      } else if (uname.text.length < 8) {
+        setState(() {
+          isloading = 0;
+        });
+        showAlertDialog(context, "username harus 8 karakter atau lebih !");
+        return;
+      } else if (pass.text.length < 8) {
+        setState(() {
+          isloading = 0;
+        });
+        showAlertDialog(context, "password harus 8 karakter atau lebih !");
+        return;
+      }
+      if (name.text.toString().trim().length > 25 ||
+          kelas.text.toString().trim().length > 25 ||
+          absen.text.toString().trim().length > 25 ||
+          uname.text.toString().trim().length > 25 ||
+          pass.text.toString().trim().length > 25) {
+        setState(() {
+          isloading = 0;
+        });
+        showAlertDialog(context, "panjang karakter  maksimal 25 huruf !");
+        return;
+      } else if (!regexnama.hasMatch(name.text)) {
+        setState(() {
+          isloading = 0;
+        });
+        showAlertDialog(context, "hanya boleh menggunakan huruf !");
+        return;
+      } else if (!regexnomor.hasMatch(absen.text)) {
+        setState(() {
+          isloading = 0;
+        });
+        showAlertDialog(context, "hanya boleh menggunakan angka !");
+        return;
+      } else if (!regexkelas.hasMatch(kelas.text)) {
+        setState(() {
+          isloading = 0;
+        });
+
+        showAlertDialog(context, "hanya boleh menggunakan angka dan huruf !");
+        return;
+      }
+
       var body = {
         "absen": absen.text,
         "kelas": kelas.text,
@@ -93,9 +165,10 @@ class _RegisterState extends State<Register> {
         await prefs.setString('uname', uname.text);
         await prefs.setString('pass', pass.text);
         dataUser.clear();
-        dataUser.add(DataUser(name.text, kelas.text, absen.text, uname.text));
+        dataUser.add(DataUser(
+            name.text, kelas.text, absen.text, uname.text, data["id"]));
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => Bottom()));
+            context, MaterialPageRoute(builder: (context) => Bottom(1)));
       }
     } catch (e) {
       setState(() {
