@@ -20,9 +20,9 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
-  final regexnama = RegExp(r'^[a-zA-Z]');
-  final regexnomor = RegExp(r'^[0-9]');
-  final regexkelas = RegExp(r'^[a-zA-Z0-9]');
+  final regexnama = RegExp(r'^[a-zA-Z ]+$');
+  final regexnomor = RegExp(r'^[0-9 ]+$');
+  final regexkelas = RegExp(r'^[a-zA-Z0-9 ]+$');
   TextEditingController name = TextEditingController();
   TextEditingController kelas = TextEditingController();
   TextEditingController absen = TextEditingController();

@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, unnecessary_import
 
 import 'dart:io';
+import 'package:ansory/maps/maps.dart';
 import 'package:ansory/profile/profile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -24,13 +25,7 @@ class _BottomState extends State<Bottom> {
   PageController pageController = PageController();
   // ignore: prefer_final_fields
   int _currentIndex = 1;
-  final screens = [
-    Center(
-      child: Text("2"),
-    ),
-    Home(),
-    Profile()
-  ];
+  final screens = [Maps(), Home(), Profile()];
 
   showAlertDialog(BuildContext context) {
     // set up the buttons
