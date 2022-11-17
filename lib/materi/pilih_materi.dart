@@ -25,13 +25,7 @@ class _PilihMateriState extends State<PilihMateri> {
               Padding(
                 padding: EdgeInsets.only(left: 0.1.sw, right: 0.1.sw),
                 child: InkWell(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                GalleryDetail("Album Masjid")));
-                  },
+                  onTap: () {},
                   child: Container(
                     width: 0.8.sw,
                     height: 0.3.sh,
@@ -76,13 +70,7 @@ class _PilihMateriState extends State<PilihMateri> {
                       padding: EdgeInsets.only(
                           left: 0.1.sw, top: 0.02.sh, right: 0.1.sw),
                       child: InkWell(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      GalleryDetail("Album Makam")));
-                        },
+                        onTap: () {},
                         child: Container(
                           width: 0.8.sw,
                           height: 0.3.sh,
@@ -129,13 +117,7 @@ class _PilihMateriState extends State<PilihMateri> {
                           right: 0.1.sw,
                           bottom: 0.02.sh),
                       child: InkWell(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      GalleryDetail("Album Mata Air")));
-                        },
+                        onTap: () {},
                         child: Container(
                           width: 0.8.sw,
                           height: 0.3.sh,

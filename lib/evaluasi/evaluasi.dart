@@ -52,7 +52,14 @@ class _EvaluationState extends State<Evaluation> {
 
   @override
   void initState() {
-    cekisalreadytes();
+    if (dataUser[0].username != "admin") {
+      cekisalreadytes();
+    } else {
+      setState(() {
+        isloading = 0;
+        iserror = 0;
+      });
+    }
     // TODO: implement initState
     super.initState();
   }
