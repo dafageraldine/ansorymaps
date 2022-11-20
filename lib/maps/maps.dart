@@ -50,7 +50,7 @@ class _MapsState extends State<Maps> {
                         child: Text(
                           states == 0
                               ? "Kamu berada di Sedayu Lawas !"
-                              : "Kamu berada di Masjid Sendang !",
+                              : "Kamu berada di Masjid Sendang Duwur !",
                           style: TextStyle(
                               color: Color.fromRGBO(82, 82, 82, 1),
                               fontSize: 15.sp,
@@ -66,7 +66,7 @@ class _MapsState extends State<Maps> {
                     child: Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          "Ayo pelajari Materinya !",
+                          "Ayo pelajari materinya !",
                           style: TextStyle(
                               color: Color.fromRGBO(82, 82, 82, 1),
                               fontSize: 14.sp,
