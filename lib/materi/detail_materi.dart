@@ -943,101 +943,104 @@ class _DetailMateriState extends State<DetailMateri> {
                   : 0.0.verticalSpace,
               widget.materi ==
                       "Bentuk Dakwah Akulturasi dan Peninggalan Secara Fisik"
-                  ? Padding(
-                      padding: EdgeInsets.only(bottom: 0.02.sh, left: 0.05.sw),
-                      child: Row(
-                        children: [
-                          InkWell(
-                            onTap: () {
-                              if (page == 2) {
-                                setState(() {
-                                  page = 1;
-                                  _controller.load(_ids[1]);
-                                  vidselected = 1;
-                                });
-                              } else if (page == 3) {
-                                setState(() {
-                                  page = 2;
-                                  runvid();
-                                });
-                              } else {
-                                Fluttertoast.showToast(
-                                    msg:
-                                        "kamu telah berada di halaman yang terakhir !",
-                                    backgroundColor: Colors.black,
-                                    textColor: Colors.white);
-                              }
-                            },
-                            child: Container(
-                              width: 0.15.sw,
-                              height: 0.15.sw,
-                              decoration: BoxDecoration(
-                                  color: Color.fromRGBO(197, 133, 95, 1),
-                                  boxShadow: [
-                                    BoxShadow(
-                                        blurRadius: 5.0,
-                                        color: Colors.black12,
-                                        spreadRadius: 2.0,
-                                        offset: Offset(0, 2))
-                                  ],
-                                  borderRadius: BorderRadius.circular(5)),
-                              child: Center(
-                                child: Icon(
-                                  Icons.arrow_back_ios_rounded,
-                                  size: 20.sp,
-                                  color: Colors.white,
+                  ? isFullScreen
+                      ? 0.0.verticalSpace
+                      : Padding(
+                          padding:
+                              EdgeInsets.only(bottom: 0.02.sh, left: 0.05.sw),
+                          child: Row(
+                            children: [
+                              InkWell(
+                                onTap: () {
+                                  if (page == 2) {
+                                    setState(() {
+                                      page = 1;
+                                      _controller.load(_ids[1]);
+                                      vidselected = 1;
+                                    });
+                                  } else if (page == 3) {
+                                    setState(() {
+                                      page = 2;
+                                      runvid();
+                                    });
+                                  } else {
+                                    Fluttertoast.showToast(
+                                        msg:
+                                            "kamu telah berada di halaman yang terakhir !",
+                                        backgroundColor: Colors.black,
+                                        textColor: Colors.white);
+                                  }
+                                },
+                                child: Container(
+                                  width: 0.15.sw,
+                                  height: 0.15.sw,
+                                  decoration: BoxDecoration(
+                                      color: Color.fromRGBO(197, 133, 95, 1),
+                                      boxShadow: [
+                                        BoxShadow(
+                                            blurRadius: 5.0,
+                                            color: Colors.black12,
+                                            spreadRadius: 2.0,
+                                            offset: Offset(0, 2))
+                                      ],
+                                      borderRadius: BorderRadius.circular(5)),
+                                  child: Center(
+                                    child: Icon(
+                                      Icons.arrow_back_ios_rounded,
+                                      size: 20.sp,
+                                      color: Colors.white,
+                                    ),
+                                  ),
                                 ),
                               ),
-                            ),
-                          ),
-                          0.55.sw.horizontalSpace,
-                          InkWell(
-                            onTap: () {
-                              if (page == 1) {
-                                setState(() {
-                                  page = 2;
-                                  _controller.load(_ids[3]);
-                                });
-                              } else if (page == 2) {
-                                setState(() {
-                                  _controller.pause();
-                                  _controller.dispose();
-                                  page = 3;
-                                });
-                              } else {
-                                Fluttertoast.showToast(
-                                    msg:
-                                        "kamu telah berada di halaman yang terakhir !",
-                                    backgroundColor: Colors.black,
-                                    textColor: Colors.white);
-                              }
-                            },
-                            child: Container(
-                              width: 0.15.sw,
-                              height: 0.15.sw,
-                              decoration: BoxDecoration(
-                                  color: Color.fromRGBO(197, 133, 95, 1),
-                                  boxShadow: [
-                                    BoxShadow(
-                                        blurRadius: 5.0,
-                                        color: Colors.black12,
-                                        spreadRadius: 2.0,
-                                        offset: Offset(0, 2))
-                                  ],
-                                  borderRadius: BorderRadius.circular(5)),
-                              child: Center(
-                                child: Icon(
-                                  Icons.arrow_forward_ios_rounded,
-                                  size: 20.sp,
-                                  color: Colors.white,
+                              0.55.sw.horizontalSpace,
+                              InkWell(
+                                onTap: () {
+                                  if (page == 1) {
+                                    setState(() {
+                                      page = 2;
+                                      _controller.load(_ids[3]);
+                                    });
+                                  } else if (page == 2) {
+                                    setState(() {
+                                      _controller.pause();
+                                      _controller.dispose();
+                                      page = 3;
+                                    });
+                                  } else {
+                                    Fluttertoast.showToast(
+                                        msg:
+                                            "kamu telah berada di halaman yang terakhir !",
+                                        backgroundColor: Colors.black,
+                                        textColor: Colors.white);
+                                  }
+                                },
+                                child: Container(
+                                  width: 0.15.sw,
+                                  height: 0.15.sw,
+                                  decoration: BoxDecoration(
+                                      color: Color.fromRGBO(197, 133, 95, 1),
+                                      boxShadow: [
+                                        BoxShadow(
+                                            blurRadius: 5.0,
+                                            color: Colors.black12,
+                                            spreadRadius: 2.0,
+                                            offset: Offset(0, 2))
+                                      ],
+                                      borderRadius: BorderRadius.circular(5)),
+                                  child: Center(
+                                    child: Icon(
+                                      Icons.arrow_forward_ios_rounded,
+                                      size: 20.sp,
+                                      color: Colors.white,
+                                    ),
+                                  ),
                                 ),
                               ),
-                            ),
+                            ],
                           ),
-                        ],
-                      ),
-                    )
-                  : Text(""),
+                        )
+                  : 0.0.verticalSpace,
               widget.materi ==
                       "Bentuk Dakwah Akulturasi dan Peninggalan Secara Ajaran"
                   ? Padding(
