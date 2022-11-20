@@ -5,6 +5,7 @@ import 'package:ansory/maps/maps.dart';
 import 'package:ansory/profile/profile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 // ignore: implementation_imports
 import 'package:flutter/src/foundation/key.dart';
 // ignore: implementation_imports
@@ -72,6 +73,8 @@ class _BottomState extends State<Bottom> {
   @override
   void initState() {
     _currentIndex = widget.index_;
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+    SystemChrome.restoreSystemUIOverlays();
     setState(() {});
     super.initState();
   }

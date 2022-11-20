@@ -1,4 +1,5 @@
 import 'package:ansory/galeri/galeridetail.dart';
+import 'package:ansory/materi/detail_materi.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -25,7 +26,15 @@ class _PilihMateriState extends State<PilihMateri> {
               Padding(
                 padding: EdgeInsets.only(left: 0.1.sw, right: 0.1.sw),
                 child: InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    String materi = widget.states == 0
+                        ? "Latar Belakang Proses Islamisasi"
+                        : "Biografi Raden Noer Rahmat";
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => DetailMateri(materi)));
+                  },
                   child: Container(
                     width: 0.8.sw,
                     height: 0.3.sh,
@@ -70,7 +79,14 @@ class _PilihMateriState extends State<PilihMateri> {
                       padding: EdgeInsets.only(
                           left: 0.1.sw, top: 0.02.sh, right: 0.1.sw),
                       child: InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          String materi =
+                              "Bentuk Dakwah Akulturasi dan Peninggalan Secara Fisik";
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => DetailMateri(materi)));
+                        },
                         child: Container(
                           width: 0.8.sw,
                           height: 0.3.sh,
@@ -117,7 +133,14 @@ class _PilihMateriState extends State<PilihMateri> {
                           right: 0.1.sw,
                           bottom: 0.02.sh),
                       child: InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          String materi =
+                              "Bentuk Dakwah Akulturasi dan Peninggalan Secara Ajaran";
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => DetailMateri(materi)));
+                        },
                         child: Container(
                           width: 0.8.sw,
                           height: 0.3.sh,
